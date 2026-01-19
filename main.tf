@@ -31,6 +31,16 @@ resource "coder_agent" "main" {
     #!/bin/sh
     set -e
     mkdir -p ${local.project_dir}
+    if command -v dockerd >/dev/null 2>&1; then
+      if [ "$(id -u)" -ne 0 ]; then
+        SUDO="sudo"
+      else
+        SUDO=""
+      fi
+      if [ ! -S /var/run/docker.sock ]; then
+        $SUDO dockerd -H unix:///var/run/docker.sock >/tmp/dockerd.log 2>&1 &
+      fi
+    fi
   EOT
 }
 
@@ -70,9 +80,13 @@ resource "docker_container" "workspace" {
   image    = docker_image.main.name
   name     = "coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)}"
   hostname = data.coder_workspace.me.name
+  privileged = true
 
   entrypoint = ["sh", "-c", replace(coder_agent.main.init_script, "localhost|127\\.0\\.0\\.1", "host.docker.internal")]
-  env        = ["CODER_AGENT_TOKEN=${coder_agent.main.token}"]
+  env        = [
+    "CODER_AGENT_TOKEN=${coder_agent.main.token}",
+    "DOCKER_HOST=unix:///var/run/docker.sock",
+  ]
 
   host {
     host = "host.docker.internal"
@@ -112,6 +126,6 @@ resource "coder_metadata" "workspace_info" {
 
   item {
     key   = "tools"
-    value = "git, maven"
+    value = "git, maven, docker"
   }
 }

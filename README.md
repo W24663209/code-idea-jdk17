@@ -3,6 +3,7 @@
 这个模板基于 Coder 官方模块，默认提供：
 - 8 核 CPU、16GB 内存的资源限制（Docker 容器）
 - 预装 git / maven / jdk17
+- 预装 Docker（容器内独立 dockerd，不挂宿主机 /var/run/docker.sock）
 - 官方 code-server 模块
 - 官方 JetBrains 模块（用于 JetBrains Gateway/IDE 连接）
 
