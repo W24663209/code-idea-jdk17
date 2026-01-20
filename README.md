@@ -1,15 +1,15 @@
-# Coder 模板：JDK17 + Maven + Git + Code Server + JetBrains
+# Coder 模板：JDK11 + Maven + Git + Code Server + JetBrains
 
 这个模板基于 Coder 官方模块，默认提供：
 - 8 核 CPU、16GB 内存的资源限制（Docker 容器）
-- 预装 git / maven / jdk17
+- 预装 git / maven / jdk11
 - 预装 Docker（容器内独立 dockerd，不挂宿主机 /var/run/docker.sock）
 - 官方 code-server 模块
 - 官方 JetBrains 模块（用于 JetBrains Gateway/IDE 连接）
 
 ## 目录结构
 - `main.tf` / `variables.tf`: Coder 模板定义
-- `build/Dockerfile`: 工作区镜像，内置 git、maven、jdk17
+- `build/Dockerfile`: 工作区镜像，内置 git、maven、jdk11
 - `scripts/package-template.sh`: 打包模板为上传用压缩包
 
 ## 使用方式
@@ -30,7 +30,7 @@
 ```
 输出压缩包路径示例：
 ```
-./dist/code-idea-jdk17-template.zip
+./dist/code-idea-jdk11-template.zip
 ```
 
 注意：Coder 读取模板时要求 `.tf` 文件在压缩包根目录；脚本会生成满足该要求的结构。

@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT_DIR="$ROOT_DIR/dist"
-ZIP_PATH="$OUT_DIR/code-idea-jdk17-template.zip"
+ZIP_PATH="$OUT_DIR/code-idea-jdk11-template.zip"
 
 mkdir -p "$OUT_DIR"
 

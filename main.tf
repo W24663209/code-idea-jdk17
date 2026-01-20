@@ -121,7 +121,7 @@ resource "coder_metadata" "workspace_info" {
 
   item {
     key   = "java"
-    value = "JDK 17"
+    value = "JDK 11"
   }
 
   item {

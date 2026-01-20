@@ -15,7 +15,7 @@ RUN apt-get update \
   && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     git \
     maven \
-    openjdk-17-jdk \
+    openjdk-11-jdk \
     ca-certificates \
     curl \
     sudo \
@@ -32,5 +32,5 @@ RUN echo "coder:100000:65536" >> /etc/subuid \
   && echo "coder:100000:65536" >> /etc/subgid
 
 USER coder
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH="$JAVA_HOME/bin:$PATH"
